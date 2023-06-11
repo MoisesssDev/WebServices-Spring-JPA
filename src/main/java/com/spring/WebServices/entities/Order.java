@@ -62,7 +62,7 @@ public class Order implements Serializable {
 	}
 
 	public OrderStatus getOrderStatus() {
-		return OrderStatus.valueOf(orderStatus);
+		return OrderStatus.valueOf(this.orderStatus);
 	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
