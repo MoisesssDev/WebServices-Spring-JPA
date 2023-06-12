@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.spring.WebServices.entities.Category;
 import com.spring.WebServices.entities.Order;
+import com.spring.WebServices.entities.OrderItem;
 import com.spring.WebServices.entities.Product;
 import com.spring.WebServices.entities.User;
 import com.spring.WebServices.entities.enums.OrderStatus;
 import com.spring.WebServices.repositories.CategoryRepository;
+import com.spring.WebServices.repositories.OrderItemRepository;
 import com.spring.WebServices.repositories.OrderRepository;
 import com.spring.WebServices.repositories.ProductRepository;
 import com.spring.WebServices.repositories.UserRepository;
@@ -37,6 +39,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository itemRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -74,6 +79,13 @@ public class TestConfig implements CommandLineRunner{
 		addCategories(p5, cat2);
 		
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		
+		itemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 	}
 	
 	

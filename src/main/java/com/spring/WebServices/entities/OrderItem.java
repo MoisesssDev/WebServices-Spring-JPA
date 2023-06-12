@@ -1,9 +1,9 @@
 package com.spring.WebServices.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.WebServices.entities.pk.OrderItemPK;
 
 import jakarta.persistence.EmbeddedId;
@@ -17,15 +17,15 @@ public class OrderItem implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK();
 	
 	private Integer quantity;
-	private BigDecimal price;
+	private Double price;
 	
 	public OrderItem() {
 	}
 
-	public OrderItem(Order order, Product product, Integer quantity, BigDecimal price) {
+	public OrderItem(Order order, Product product, Integer quantity, Double price) {
 		super();
 		id.setOrder(order);
 		id.setProduct(product);
@@ -33,6 +33,7 @@ public class OrderItem implements Serializable{
 		this.price = price;
 	}
 	
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
@@ -57,11 +58,11 @@ public class OrderItem implements Serializable{
 		this.quantity = quantity;
 	}
 
-	public BigDecimal getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
